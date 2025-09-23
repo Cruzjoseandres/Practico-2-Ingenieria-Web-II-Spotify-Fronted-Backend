@@ -1,0 +1,218 @@
+/* Variables de Spotify */
+$spotify-green: #1db954;
+$spotify-black: #121212;
+$spotify-dark-gray: #181818;
+$spotify-light-gray: #282828;
+$spotify-text: #ffffff;
+$spotify-text-secondary: #b3b3b3;
+
+
+
+
+
+.spotify-footer {
+  --background: #{$spotify-black};
+  --color: #{$spotify-text};
+  --border-color: rgba(255, 255, 255, 0.1);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  
+  ion-toolbar {
+    --background: #{$spotify-black};
+    --color: #{$spotify-text};
+    --border-width: 1px 0 0 0;
+    --border-style: solid;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --min-height: 60px;
+    --padding-start: 0;
+    --padding-end: 0;
+    
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
+.tab-bar {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-around;
+  padding: 4px 8px 8px 8px;
+}
+
+.tab-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  min-width: 60px;
+  position: relative;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+
+  ion-icon {
+    font-size: 22px;
+    color: $spotify-text-secondary;
+    margin-bottom: 2px;
+    transition: all 0.2s ease;
+  }
+
+  ion-label {
+    --color: #{$spotify-text-secondary};
+    font-size: 10px;
+    font-weight: 500;
+    text-align: center;
+    margin: 0;
+    transition: all 0.2s ease;
+    line-height: 1.2;
+  }
+
+  /* Estado activo */
+  &.active {
+    ion-icon {
+      color: $spotify-green;
+      transform: scale(1.1);
+    }
+
+    ion-label {
+      --color: #{$spotify-green};
+      font-weight: 700;
+    }
+
+    /* Indicador de tab activo */
+    &::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 2px;
+      background-color: $spotify-green;
+      border-radius: 2px;
+    }
+  }
+}
+
+
+/* Animaciones */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.spotify-footer {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Efecto de pulso para tab activo */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.tab-button.active ion-icon {
+  animation: pulse 0.3s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .spotify-footer ion-toolbar {
+    --min-height: 56px;
+  }
+  
+  .tab-bar {
+    padding: 4px 4px 8px 4px;
+  }
+  
+  .tab-button {
+    padding: 4px 6px;
+    min-width: 50px;
+    
+    ion-icon {
+      font-size: 20px;
+      margin-bottom: 1px;
+    }
+    
+    ion-label {
+      font-size: 9px;
+    }
+    
+    &.active::before {
+      width: 20px;
+      height: 2px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .spotify-footer ion-toolbar {
+    --min-height: 52px;
+  }
+  
+  .tab-bar {
+    padding: 2px 2px 6px 2px;
+  }
+  
+  .tab-button {
+    padding: 3px 4px;
+    min-width: 45px;
+    
+    ion-icon {
+      font-size: 18px;
+      margin-bottom: 1px;
+    }
+    
+    ion-label {
+      font-size: 8px;
+    }
+    
+    &.active::before {
+      width: 18px;
+      height: 2px;
+    }
+  }
+}
+
+/* Efecto de vibración sutil en dispositivos móviles */
+@media (max-width: 768px) {
+  .tab-button:active {
+    animation: vibrate 0.1s ease-in-out;
+  }
+}
+
+@keyframes vibrate {
+  0%, 100% {
+    transform: scale(0.95);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+}

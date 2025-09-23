@@ -1,0 +1,46 @@
+<app-header [title]="isEditMode ? 'Editar Género' : 'Crear Género'" [showBackButton]="true" [backUrl]="'/generos'" [showMenu]="false"></app-header>
+
+<ion-content class="create-genre-page">
+  <form [formGroup]="form" (ngSubmit)="guardarDatos()" class="form-wrap">
+
+    
+    <ion-card *ngIf="errorMsg" color="danger">
+    <ion-card-content class="ion-text-center">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      {{ errorMsg }}
+      <ion-button fill="clear" size="small" (click)="clearError()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+    <ion-item>
+      <ion-label position="stacked">Nombre del Género</ion-label>
+      <ion-input 
+        formControlName="nombre" 
+        type="text" 
+        placeholder="Ingrese el nombre del género"
+        [class.ion-invalid]="form.get('nombre')?.invalid && form.get('nombre')?.touched"
+        [class.ion-touched]="form.get('nombre')?.touched">
+      </ion-input>
+      <ion-note slot="error" *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched">
+        <span *ngIf="form.get('nombre')?.errors?.['required']">El nombre es obligatorio</span>
+        <span *ngIf="form.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 2 caracteres</span>
+      </ion-note>
+    </ion-item>
+
+    <div class="actions">
+      <ion-button type="submit" expand="block" [disabled]="form.invalid">
+        <ion-icon name="{{ isEditMode ? 'checkmark' : 'add' }}-outline" slot="start"></ion-icon>
+        {{ isEditMode ? 'Actualizar' : 'Crear' }}
+      </ion-button>
+      <ion-button fill="clear" (click)="cancelar()">
+        <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        Cancelar
+      </ion-button>
+    </div>
+  </form>
+</ion-content>
+
+<app-footer></app-footer>
+

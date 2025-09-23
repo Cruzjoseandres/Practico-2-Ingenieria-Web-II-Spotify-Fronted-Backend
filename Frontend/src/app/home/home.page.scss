@@ -1,0 +1,190 @@
+// Variables de colores de Spotify
+$spotify-green: #1db954;
+$spotify-black: #121212;
+$spotify-dark-gray: #181818;
+$spotify-light-gray: #282828;
+$spotify-text: #ffffff;
+$spotify-text-secondary: #b3b3b3;
+
+// Estilos generales de la página
+.home-page {
+  --background: #{$spotify-black};
+  --color: #{$spotify-text};
+  
+  .page-inner {
+    padding: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+// Sección hero
+.hero {
+  margin-bottom: 32px;
+  padding: 24px 0;
+  
+  h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(to right, #1ed760, #1db954);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  p {
+    font-size: 18px;
+    color: $spotify-text-secondary;
+    margin-bottom: 24px;
+  }
+}
+
+// Cuadrícula del dashboard
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Tarjetas del dashboard
+.dashboard-card {
+  background-color: $spotify-dark-gray;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: $spotify-light-gray;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    
+    .icon {
+      color: $spotify-green;
+    }
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: $spotify-green;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
+  
+  .icon {
+    margin-bottom: 16px;
+    color: $spotify-text;
+    transition: color 0.3s ease;
+    
+    ion-icon {
+      font-size: 48px;
+    }
+  }
+  
+  .info {
+    flex: 1;
+    
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    p {
+      color: $spotify-text-secondary;
+      font-size: 14px;
+      margin: 0;
+    }
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+    
+    ion-button {
+      --color: #{$spotify-text-secondary};
+      --ripple-color: #{$spotify-green};
+      
+      &:hover {
+        --color: #{$spotify-green};
+      }
+    }
+  }
+}
+
+// Animaciones
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-card {
+  animation: fadeIn 0.5s ease forwards;
+  
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}
+
+// Botones
+ion-button {
+  --border-radius: 500px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  
+  &[color="success"] {
+    --background: #{$spotify-green};
+    --background-hover: #{darken($spotify-green, 10%)};
+    --background-activated: #{darken($spotify-green, 15%)};
+    --background-focused: #{darken($spotify-green, 15%)};
+  }
+  
+  &[fill="clear"] {
+    --color: #{$spotify-text};
+    --background: transparent;
+    --background-hover: rgba(255, 255, 255, 0.1);
+    --background-activated: rgba(255, 255, 255, 0.2);
+  }
+}
+
+// Media queries para responsive
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+  
+  .hero p {
+    font-size: 16px;
+  }
+  
+  .dashboard-card .info h2 {
+    font-size: 20px;
+  }
+}

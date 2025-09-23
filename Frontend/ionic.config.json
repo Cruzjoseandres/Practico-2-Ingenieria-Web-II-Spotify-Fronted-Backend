@@ -1,0 +1,7 @@
+{
+  "name": "Spotify-Client",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

@@ -1,0 +1,34 @@
+<app-header [title]="'Artistas'" [showBackButton]="false" [showMenu]="true"></app-header>
+
+<ion-content class="artists-page">
+  <div class="page-inner">
+    <section class="hero">
+      <h2>Artistas</h2>
+      <p>Descubre artistas y sus mejores canciones</p>
+    </section>
+
+    <section class="artists-grid" role="list">
+      <article
+        class="artist-card"
+        role="listitem"
+        *ngFor="let artista of artistaList"
+        (click)="detail(artista)"
+        title="{{ artista.nombre | titlecase }}"
+      >
+        <div class="cover-wrap" aria-hidden="true">
+          <img
+            [src]="getArtistaImageUrl(artista)"
+            [alt]="artista.nombre"
+          />
+          <button class="play" aria-hidden="true">▶</button>
+        </div>
+
+        <div class="meta">
+          <h3>{{ artista.nombre | titlecase }}</h3>
+          <p class="sub">Artista</p>
+        </div>
+      </article>
+    </section>
+  </div>
+</ion-content>
+<app-footer></app-footer>

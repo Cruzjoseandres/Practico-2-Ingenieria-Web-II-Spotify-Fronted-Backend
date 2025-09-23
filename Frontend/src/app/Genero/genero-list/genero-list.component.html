@@ -1,0 +1,30 @@
+<app-header [title]="'Géneros'" [showBackButton]="false" [showMenu]="true"></app-header>
+
+<ion-content class="genres-page">
+  <div class="page-inner">
+    <section class="hero">
+      <h2>Explora géneros</h2>
+      <p>Selecciona un género para ver sus canciones.</p>
+    </section>
+
+    <section class="genres-grid" role="list">
+      <div
+        class="genre-card"
+        role="listitem"
+        *ngFor="let genero of generoList"
+        (click)="detail(genero.nombre)"
+        title="{{ genero.nombre | titlecase }}"
+      >
+        <div class="cover" aria-hidden="true">
+          {{ (genero.nombre || '')[0] | uppercase }}
+        </div>
+        <div class="info">
+          <h3>{{ genero.nombre | titlecase }}</h3>
+          <p class="meta">Género • ID {{ genero.id }}</p>
+        </div>
+        <div class="chev" aria-hidden="true">›</div>
+      </div>
+    </section>
+  </div>
+</ion-content>
+<app-footer></app-footer>

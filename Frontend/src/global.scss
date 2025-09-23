@@ -1,0 +1,369 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import '@ionic/angular/css/palettes/dark.system.css';
+
+/* ===== SPOTIFY GLOBAL STYLES ===== */
+
+/* Variables de colores Spotify */
+:root {
+  --spotify-green: #1db954;
+  --spotify-green-dark: #1ed760;
+  --spotify-black: #121212;
+  --spotify-dark-gray: #181818;
+  --spotify-light-gray: #282828;
+  --spotify-medium-gray: #404040;
+  --spotify-text: #ffffff;
+  --spotify-text-secondary: #b3b3b3;
+  --spotify-red: #e22134;
+  --spotify-overlay: rgba(0, 0, 0, 0.7);
+}
+
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Reset y estilos base */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: var(--spotify-black);
+  color: var(--spotify-text);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Sobrescribir estilos de Ionic para que coincidan con Spotify */
+ion-app {
+  background-color: var(--spotify-black) !important;
+}
+
+/* Estilos para el contenido principal */
+ion-content {
+  --background: var(--spotify-black);
+  --color: var(--spotify-text);
+  --padding-top: 0;
+  --padding-bottom: 150px; /* Más espacio para el footer fijo */
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+/* Estilos para botones */
+ion-button {
+  --color: var(--spotify-text);
+  --background: transparent;
+  --background-hover: rgba(255, 255, 255, 0.1);
+  --background-activated: rgba(255, 255, 255, 0.2);
+  --border-radius: 500px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --padding-start: 24px;
+  --padding-end: 24px;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  
+  &.button-success,
+  &[color="success"] {
+    --background: var(--spotify-green);
+    --background-hover: var(--spotify-green-dark);
+    --background-activated: #179443;
+    --color: var(--spotify-text);
+  }
+  
+  &.button-danger,
+  &[color="danger"] {
+    --background: var(--spotify-red);
+    --background-hover: #c01e2f;
+    --background-activated: #a01a29;
+    --color: var(--spotify-text);
+  }
+  
+  &[fill="clear"] {
+    --background: transparent;
+    --color: var(--spotify-text-secondary);
+    
+    &:hover {
+      --color: var(--spotify-text);
+    }
+  }
+  
+  &[fill="outline"] {
+    --border-color: var(--spotify-text-secondary);
+    --color: var(--spotify-text-secondary);
+    --background: transparent;
+    
+    &:hover {
+      --border-color: var(--spotify-text);
+      --color: var(--spotify-text);
+      --background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+/* Estilos para items */
+ion-item {
+  --background: transparent;
+  --color: var(--spotify-text);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --inner-padding-end: 16px;
+  --inner-padding-start: 16px;
+  --padding-start: 0;
+  --padding-end: 0;
+  
+  ion-label {
+    --color: var(--spotify-text);
+    
+    &.label-stacked {
+      --color: var(--spotify-text-secondary);
+      font-weight: 500;
+    }
+  }
+  
+  ion-input,
+  ion-textarea {
+    --color: var(--spotify-text);
+    --placeholder-color: var(--spotify-text-secondary);
+    --background: rgba(255, 255, 255, 0.05);
+    --border-radius: 4px;
+    --padding-start: 12px;
+    --padding-end: 12px;
+  }
+  
+  &:hover {
+    --background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Estilos para cards */
+ion-card {
+  --background: var(--spotify-dark-gray);
+  --color: var(--spotify-text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  
+  ion-card-header {
+    --color: var(--spotify-text);
+  }
+  
+  ion-card-title {
+    --color: var(--spotify-text);
+    font-weight: 700;
+  }
+  
+  ion-card-subtitle {
+    --color: var(--spotify-text-secondary);
+  }
+  
+  ion-card-content {
+    --color: var(--spotify-text);
+  }
+}
+
+/* Estilos para listas */
+ion-list {
+  background: transparent;
+  
+  ion-list-header {
+    --color: var(--spotify-text);
+    font-weight: 700;
+  }
+}
+
+/* Estilos para el searchbar */
+ion-searchbar {
+  --background: var(--spotify-dark-gray);
+  --color: var(--spotify-text);
+  --placeholder-color: var(--spotify-text-secondary);
+  --icon-color: var(--spotify-text-secondary);
+  --border-radius: 500px;
+  --box-shadow: none;
+  --border-color: transparent;
+  
+  &.searchbar-has-focus {
+    --border-color: var(--spotify-green);
+  }
+}
+
+/* Estilos para modales y popovers */
+ion-modal,
+ion-popover {
+  --background: var(--spotify-dark-gray);
+  --color: var(--spotify-text);
+  
+  .modal-wrapper,
+  .popover-content {
+    background: var(--spotify-dark-gray);
+    color: var(--spotify-text);
+  }
+}
+
+/* Estilos para toast y alert */
+ion-toast {
+  --background: var(--spotify-light-gray);
+  --color: var(--spotify-text);
+  --border-radius: 8px;
+}
+
+ion-alert {
+  --background: var(--spotify-dark-gray);
+  --color: var(--spotify-text);
+  
+  .alert-button {
+    --color: var(--spotify-green);
+  }
+  
+  .alert-button.alert-button-cancel {
+    --color: var(--spotify-text-secondary);
+  }
+}
+
+/* Scrollbars personalizados (webkit) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--spotify-dark-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--spotify-medium-gray);
+  border-radius: 4px;
+  
+  &:hover {
+    background: var(--spotify-text-secondary);
+  }
+}
+
+/* Clases utilitarias */
+.text-spotify-green {
+  color: var(--spotify-green) !important;
+}
+
+.text-spotify-secondary {
+  color: var(--spotify-text-secondary) !important;
+}
+
+.bg-spotify-dark {
+  background-color: var(--spotify-dark-gray) !important;
+}
+
+.bg-spotify-light {
+  background-color: var(--spotify-light-gray) !important;
+}
+
+.border-spotify {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.rounded-spotify {
+  border-radius: 8px !important;
+}
+
+.shadow-spotify {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Animaciones globales */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Clases de animación */
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+.slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+.pulse {
+  animation: pulse 0.6s ease-in-out;
+}
+
+/* Estados de hover para móviles (opcional) */
+@media (hover: hover) and (pointer: fine) {
+  .hover-spotify:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    transition: background-color 0.2s ease;
+  }
+}

@@ -1,0 +1,119 @@
+/* ...existing code... */
+:host {
+  --spotify-green: #1db954;
+  --bg-dark: #0f0f0f;
+  --card-dark: #121212;
+  display: block;
+  min-height: 100vh;
+}
+
+.header-spotify ion-toolbar {
+  --background: linear-gradient(90deg, rgba(29,185,84,0.08), transparent);
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+
+.genres-page {
+  background: linear-gradient(180deg, #0b0b0b 0%, #0f0f12 100%);
+  color: #ffffff;
+  padding: 16px 12px;
+  padding-bottom: 110px; /* Más espacio para el footer fijo */
+  min-height: calc(100vh - 56px); /* Altura completa menos el header */
+}
+
+.page-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero {
+  margin: 8px 0 18px;
+  h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+  }
+  p {
+    margin: 6px 0 0;
+    color: #bdbdbd;
+    font-size: 13px;
+  }
+}
+
+.genres-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+/* Card estilo Spotify */
+.genre-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.03);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  min-height: 72px;
+}
+
+.genre-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.cover {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 24px;
+  background: linear-gradient(135deg, var(--spotify-green), #6be281 60%);
+  box-shadow: 0 4px 10px rgba(13,17,16,0.6);
+}
+
+.info h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.info .meta {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #9b9b9b;
+}
+
+/* pequeña flecha a la derecha */
+.chev {
+  margin-left: auto;
+  color: rgba(255,255,255,0.35);
+  font-size: 28px;
+  transform: translateX(4px);
+}
+
+/* Ajustes móviles */
+@media (max-width: 480px) {
+  .cover {
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+  }
+  .genres-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* ...existing code... */

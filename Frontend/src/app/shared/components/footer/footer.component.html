@@ -1,0 +1,37 @@
+<ion-footer class="spotify-footer">
+  <ion-toolbar>
+    <div class="tab-bar">
+      
+      <!-- Home Tab -->
+      <div class="tab-button" [class.active]="isActive('/home')" (click)="navigateTo('/home')">
+        <ion-icon [name]="isActive('/home') ? 'home' : 'home-outline'"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </div>
+
+      <!-- Géneros Tab -->
+      <div class="tab-button" [class.active]="isActive('/generos')" (click)="navigateTo('/generos')">
+        <ion-icon [name]="isActive('/generos') ? 'list' : 'list-outline'"></ion-icon>
+        <ion-label>Géneros</ion-label>
+      </div>
+
+      <!-- Artistas Tab -->
+      <div class="tab-button" [class.active]="isActive('/artistas')" (click)="navigateTo('/artistas')">
+        <ion-icon [name]="isActive('/artistas') ? 'person' : 'person-outline'"></ion-icon>
+        <ion-label>Artistas</ion-label>
+      </div>
+
+      <!-- Álbumes Tab -->
+      <div class="tab-button" [class.active]="isActive('/albums')" (click)="navigateTo('/albums')">
+        <ion-icon [name]="isActive('/albums') ? 'disc' : 'disc-outline'"></ion-icon>
+        <ion-label>Álbumes</ion-label>
+      </div>
+
+      <!-- Canciones Tab -->
+      <div class="tab-button" [class.active]="isActive('/canciones')" (click)="navigateTo('/canciones')">
+        <ion-icon [name]="isActive('/canciones') ? 'musical-notes' : 'musical-notes-outline'"></ion-icon>
+        <ion-label>Canciones</ion-label>
+      </div>
+
+    </div>
+  </ion-toolbar>
+</ion-footer>
