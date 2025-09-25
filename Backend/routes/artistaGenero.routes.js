@@ -10,11 +10,9 @@ module.exports = app => {
 	const artistaGeneroController = require('../controllers/artistaGenero.controller');
 
 	router.get('/', artistaGeneroController.getAllArtistasWithGeneros);
-	router.get('/:id/artistasConGeneros', artistaGeneroController.getArtistasWithGenerosById);
-	router.post('/',isJsonRequestValid,validationJson(artistaGeneroSchema), artistaGeneroController.createAlbum);
-	router.get('/:id', getObjectOr404(db.album), artistaGeneroController.getAlbumById);
-	router.put('/:id',validationJson,validationJson(artistaGeneroSchema), getObjectOr404(db.album), artistaGeneroController.updateAlbum);
-	router.delete('/:id', getObjectOr404(db.album), artistaGeneroController.deleteAlbum);
+	router.get('/:id/artistasConGeneros', artistaGeneroController.getArtistasByGeneroId);
+	router.post('/',isJsonRequestValid,validationJson(artistaGeneroSchema), artistaGeneroController.createArtistaGenero);
+	router.delete('/:id', getObjectOr404(db.album), artistaGeneroController.deleteArtistaGenero);
 
 	app.use('/albums', router);
 };

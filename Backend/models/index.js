@@ -9,8 +9,8 @@ const artistaGenero = require('./ArtistaGenero.models')(sequelize);
 
 // Asociaciones música
 // Artista 1 - N Album
-album.belongsTo(artista, { foreignKey: 'ArtistaId', as: 'artista' });
-artista.hasMany(album, { foreignKey: 'ArtistaId', as: 'albums' });
+album.belongsTo(artista, { foreignKey: 'idArtista', as: 'artista' });
+artista.hasMany(album, { foreignKey: 'idArtista', as: 'albums' });
 
 // Album 1 - N Cancion
 cancion.belongsTo(album, { foreignKey: 'AlbumId', as: 'album' });

@@ -1,0 +1,41 @@
+<app-header [title]="'Canciones'" [showBackButton]="true" [showMenu]="true"></app-header>
+
+<ion-content class="songs-content">
+  <div class="content-wrap">
+    <h2 class="page-title">Canciones</h2>
+
+    <ion-list *ngIf="cancionesList?.length; " class="songs-list" lines="none" role="list">
+      <ion-item
+        class="song-item"
+        *ngFor="let canciones of cancionesList; let i = index"
+        (click)="detail(canciones)"
+        button
+        detail="false"
+        role="listitem"
+        tabindex="0"
+        aria-label="Abrir {{canciones.nombre}}"
+      >
+        <div class="left">
+          <div class="index">{{ i + 1 }}</div>
+
+          <ion-avatar class="cover" slot="start" aria-hidden="true">
+            <img [src]="getCancionImageUrl(canciones)" alt="Portada {{canciones.nombre}}" />
+          </ion-avatar>
+
+          <div class="meta">
+            <div class="title">{{ canciones.nombre }}</div>
+            <div class="sub">{{ canciones.album?.artista?.nombre || 'Artista' }} • {{ canciones.album?.nombre }}</div>
+          </div>
+        </div>
+
+        
+      </ion-item>
+    </ion-list>
+
+    <ng-template #noSongs>
+      <div class="no-songs">No hay canciones para mostrar.</div>
+    </ng-template>
+  </div>
+</ion-content>
+
+<app-footer></app-footer>

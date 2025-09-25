@@ -1,0 +1,64 @@
+<app-header [title]="cancion?.nombre || 'Canción'" [showBackButton]="true" [showMenu]="true"></app-header>
+
+<ion-content class="song-detail-content">
+  <div class="wrap">
+    <div class="hero">
+      <div class="cover">
+        <img *ngIf="cancion" [src]="'http://localhost:3000/ImagenesCanciones/' + (cancion.url ?? (cancion.id + '.jpg'))"
+          alt="{{ cancion?.nombre }}" />
+      </div>
+
+      <div class="info">
+        <div class="type">CANCIÓN</div>
+        <h1 class="title">{{ cancion?.nombre }}</h1>
+        <div class="meta">
+          <a class="artist" *ngIf="cancion?.artista" (click)="router.navigate(['/artistas', cancion.artista.id])">
+            {{ cancion.artista?.nombre }}
+          </a>
+          <span class="dot" *ngIf="cancion?.artista && cancion?.album">•</span>
+          <a class="album" *ngIf="cancion?.album" (click)="router.navigate(['/albums', cancion.album.id])">
+            {{ cancion.album?.nombre }}
+          </a>
+        </div>
+
+        <div class="actions">
+          <ion-button class="btn-back" fill="clear" (click)="volverAlbum()">
+            Volver al álbum
+          </ion-button>
+          <div class="actions">
+            <ion-button class="btn-edit" fill="clear" (click)="editarCancion(cancion)">
+              <ion-icon name="create-outline" slot="start"></ion-icon>
+              Editar
+            </ion-button>
+            <ion-button class="btn-delete" fill="clear" color="danger" (click)="eliminarCancion()">
+              <ion-icon name="trash-outline" slot="start"></ion-icon>
+              Eliminar
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="player">
+
+      <div class="audio-wrap" *ngIf="audioSrc; else noAudio">
+        <audio controls preload="metadata" [src]="audioSrc">
+          Tu navegador no soporta la reproducción de audio.
+        </audio>
+      </div>
+
+      <ng-template #noAudio>
+        <p class="no-audio">Audio no disponible.</p>
+      </ng-template>
+
+      <div class="player-info" *ngIf="cancion">
+        <div class="left">
+          <div class="now">{{ cancion?.nombre }}</div>
+          <div class="sub">{{ cancion?.artista?.nombre || '' }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<app-footer></app-footer>

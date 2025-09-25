@@ -1,28 +1,21 @@
-
 <app-header [title]="'Crear Artista'" [showBackButton]="true" [backUrl]="'/artistas'" [showMenu]="false"></app-header>
 
 <ion-content class="create-artist-page">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-wrap" enctype="multipart/form-data">
-    
-    <!-- Mensaje de error -->
-    <ion-card *ngIf="errorMessage" class="error-card">
-      <ion-card-content>
-        <div class="error-message">
-          <ion-icon name="alert-circle-outline"></ion-icon>
-          <span>{{ errorMessage }}</span>
-          <ion-button fill="clear" size="small" (click)="clearError()">
-            <ion-icon name="close-outline"></ion-icon>
-          </ion-button>
-        </div>
+  <form [formGroup]="form" (ngSubmit)="guardarDatos()" class="form-wrap" enctype="multipart/form-data">
+
+    <ion-card *ngIf="errorMsg" color="danger">
+      <ion-card-content class="ion-text-center">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+        {{ errorMsg }}
+        <ion-button fill="clear" size="small" (click)="clearError()">
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-button>
       </ion-card-content>
     </ion-card>
 
     <ion-item>
       <ion-label position="stacked">Nombre</ion-label>
-      <ion-input 
-        formControlName="nombre" 
-        type="text" 
-        placeholder="Nombre del artista"
+      <ion-input formControlName="nombre" type="text" placeholder="Nombre del artista"
         [class.ion-invalid]="form.get('nombre')?.invalid && form.get('nombre')?.touched"
         [class.ion-touched]="form.get('nombre')?.touched">
       </ion-input>
@@ -33,16 +26,20 @@
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Imagen (opcional)</ion-label>
-      <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+      <ion-label position="stacked">Imagen</ion-label>
+      <input type="file" namme="imagen" accept="image/*" (change)="onFileSelected($event)" />
+    </ion-item>
+    <ion-item *ngIf="previewUrl">
+      <ion-label position="stacked">Vista previa</ion-label>
+      <ion-img [src]="previewUrl"></ion-img>
     </ion-item>
 
     <div class="actions">
-      <ion-button type="submit" expand="block" [disabled]="form.invalid || uploading">
+      <ion-button type="submit" expand="block" [disabled]="form.invalid">
         <ion-icon name="add-outline" slot="start"></ion-icon>
-        {{ uploading ? 'Creando...' : 'Crear artista' }}
+        Guardar Artista
       </ion-button>
-      <ion-button fill="clear" (click)="cancelar()" [disabled]="uploading">
+      <ion-button fill="clear" (click)="cancelar()">
         <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
         Cancelar
       </ion-button>

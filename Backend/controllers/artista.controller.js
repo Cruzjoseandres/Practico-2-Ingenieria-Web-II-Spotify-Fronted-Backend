@@ -11,15 +11,18 @@ exports.getArtistaById = async (req, res) => {
 
 exports.createArtista = async (req, res) => {
     const { nombre } = req.body;
-    const { imagenArtista } = req.files;
+    const  imagenArtista  = req.files?.imagenArtista ?? null;
+    if (!imagenArtista) {
+        return res.status(400).json({ error: 'La imagen del artista es obligatoria' });
+    }
     try {
+
         const artista = await db.artista.create({ nombre });
 
-        if (imagenArtista) {
-            const uploadedFile = __dirname + '/../public/ImagenesArtista/' + artista.id + '.jpg';
-            await imagenArtista.mv(uploadedFile);
-            await db.artista.update({ url: artista.id + '.jpg' }, { where: { id: artista.id } });
-        }
+        const uploadedFile = __dirname + '/../public/ImagenesArtista/' + artista.id + '.jpg';
+        await imagenArtista.mv(uploadedFile);
+        await db.artista.update({ url: artista.id + '.jpg' }, { where: { id: artista.id } });
+
 
         res.status(201).json(artista);
     } catch (error) {

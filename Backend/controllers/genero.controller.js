@@ -12,6 +12,7 @@ exports.getGeneroById = async (req, res) => {
 exports.createGenero = async (req, res) => {
     const { nombre } = req.body;
     try {
+        
         const genero = await db.genero.create({ nombre });
         res.status(201).json(genero);
     } catch (error) {

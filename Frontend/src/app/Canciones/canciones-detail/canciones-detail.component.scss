@@ -1,0 +1,117 @@
+:host { display:block; }
+
+.song-detail-content {
+  background: #0f0f0f;
+  color: #fff;
+  min-height: calc(100vh - 120px);
+  padding: 28px 20px;
+  padding-bottom: calc(140px + env(safe-area-inset-bottom));
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 8px 12px;
+}
+
+/* Hero */
+.hero {
+  display:flex;
+  gap:28px;
+  align-items:flex-end;
+  margin-bottom:24px;
+}
+
+.cover {
+  width:200px;
+  height:200px;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+  flex:0 0 auto;
+}
+.cover img { width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Info */
+.info { flex:1; display:flex; flex-direction:column; gap:10px; }
+
+.type { font-size:12px; color:#b3b3b3; letter-spacing:2px; font-weight:700; }
+.title { font-size:36px; margin:0; font-weight:800; color:#fff; }
+.meta { color:#b3b3b3; font-size:14px; display:flex; gap:8px; align-items:center; }
+.meta a { color:#b3b3b3; cursor:pointer; text-decoration:none; }
+.meta a:hover { color:#fff; text-decoration:underline; }
+
+/* Actions */
+.actions { display:flex; gap:12px; margin-top:8px; align-items:center; }
+.btn-back { color:#e6e6e6; }
+
+/* Player - usamos controles nativos */
+.player { margin-top:18px; display:flex; flex-direction:column; gap:12px; }
+
+.audio-wrap {
+  width: 100%;
+  max-width: 720px;
+  background: rgba(255,255,255,0.02);
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.6);
+}
+
+/* estilizado leve del control nativo (no todos los navegadores lo aplican) */
+.audio-wrap audio {
+  width: 100%;
+  height: 48px;
+  outline: none;
+  background: transparent;
+  border-radius: 6px;
+}
+
+/* info adicional */
+.player-info { display:flex; justify-content:space-between; align-items:center; color:#b3b3b3; font-size:13px; }
+.now { font-weight:700; color:#fff; }
+.sub { font-size:13px; color:#b3b3b3; margin-top:2px; }
+
+.no-audio { color:#b3b3b3; padding:12px 0; }
+
+
+/* Agrega esto a canciones-detail.component.scss */
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.btn-edit {
+  background: rgba(255,255,255,0.02);
+  color: #e6e6e6;
+  border-radius: 24px;
+  font-weight: 600;
+  transition: background .12s, color .12s;
+  border: none;
+}
+.btn-edit:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.btn-delete {
+  background: transparent;
+  color: #ef4b5b;
+  border-radius: 24px;
+  font-weight: 700;
+  border: 1px solid rgba(239,75,91,0.16);
+  transition: background .12s, color .12s;
+}
+.btn-delete:hover {
+  background: rgba(239,75,91,0.12);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width:880px) {
+  .hero { flex-direction:column; align-items:flex-start; gap:16px; }
+  .cover { width:160px; height:160px; }
+  .title { font-size:28px; }
+  .audio-wrap audio { height:44px; }
+}

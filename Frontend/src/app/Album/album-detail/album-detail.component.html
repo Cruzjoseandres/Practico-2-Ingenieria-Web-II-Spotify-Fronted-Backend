@@ -1,0 +1,77 @@
+
+<app-header [title]="album?.nombre || 'Álbum'" [showBackButton]="true" [showMenu]="true"></app-header>
+
+<ion-content class="album-detail-content">
+  <div class="content-wrap">
+    <div class="album-hero">
+      <div class="cover" aria-hidden="true">
+        <img *ngIf="album" [src]="getAlbumImageUrl(album)" alt="Portada {{ album?.nombre }}" />
+        <div class="cover-gradient" aria-hidden="true"></div>
+      </div>
+
+      <div class="info">
+        <div class="type">ÁLBUM</div>
+        <h1 class="title">{{ album?.nombre }}</h1>
+
+        <div class="byline">
+          <a class="artist-link" (click)="router.navigate(['/artistas', album?.idArtista])">
+            {{ album?.artista?.nombre || 'Artista desconocido' }}
+          </a>
+        </div>
+
+        <div class="actions" role="group" aria-label="Acciones álbum">
+          <ion-button class="btn-add" (click)="createCancion ()" aria-label="Agregar canción">
+            <ion-icon name="add-outline" slot="start"></ion-icon>
+            Agregar canción
+          </ion-button>
+
+          <ion-button class="btn-edit" fill="clear" (click)="editarAlbum()" aria-label="Editar álbum">
+            <ion-icon name="create-outline" slot="start"></ion-icon>
+            Editar álbum
+          </ion-button>
+
+          <ion-button class="btn-delete" fill="clear" (click)="eliminarAlbum()" aria-label="Eliminar álbum">
+            <ion-icon name="trash-outline" slot="start"></ion-icon>
+            Eliminar
+          </ion-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tracks-section">
+      <div class="tracks-header">
+        <h2 class="section-title">Canciones</h2>
+      </div>
+
+      <ion-list lines="none" class="tracks-list" *ngIf="cancionesList?.length; else noSongs">
+        <ion-item class="track-item" *ngFor="let song of cancionesList; let i = index" (click)="detail(song)" button>
+          <div class="track-left">
+            <div class="track-index">{{ i + 1 }}</div>
+
+            <ion-avatar class="track-cover" slot="start">
+              <img [src]="getCancionesImageUrl(song)" alt="Portada {{ song.nombre }}" />
+            </ion-avatar>
+
+            <div class="track-meta">
+              <div class="track-name">{{ song.nombre }}</div>
+              <div class="track-sub">{{ album?.artista?.nombre || 'Artista desconocido' }}</div>
+            </div>
+          </div>
+
+          <!-- <div class="track-right" slot="end">
+            <div class="track-duration">{{ formatDuration(song.duracion) }}</div>
+            <ion-button class="track-play" fill="clear" (click)="$event.stopPropagation(); playSong(song)" aria-label="Reproducir {{song.nombre}}">
+              <ion-icon name="play"></ion-icon>
+            </ion-button>
+          </div> -->
+        </ion-item>
+      </ion-list>
+
+      <ng-template #noSongs>
+        <p class="no-songs">Este álbum no tiene canciones aún. Usa "Agregar canción" para añadir una.</p>
+      </ng-template>
+    </div>
+  </div>
+</ion-content>
+
+<app-footer></app-footer>

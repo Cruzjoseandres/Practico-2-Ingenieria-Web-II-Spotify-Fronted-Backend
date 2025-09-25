@@ -1,3 +1,52 @@
-<p>
-  artista-detail works!
-</p>
+<app-header [title]="artista?.nombre || 'Artista'" [showBackButton]="true" [showMenu]="true"></app-header>
+
+<ion-content class="artista-detail-content">
+  <div class="artista-detail-container">
+    <div class="artista-header">
+      <img *ngIf="artista" [src]="getArtistaImageUrl(artista)" alt="Imagen del artista" class="artista-img" />
+      <div class="artista-info">
+        <h1>{{ artista?.nombre }}</h1>
+      </div>
+    </div>
+
+    <div class="artista-actions" *ngIf="artista">
+      <ion-button color="primary" (click)="createAlbum()">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        Crear álbum
+      </ion-button>
+      <ion-button color="secondary" (click)="editarArtista()">
+        <ion-icon name="create-outline" slot="start"></ion-icon>
+        Editar artista
+      </ion-button>
+      <ion-button color="danger" (click)="eliminarArtista()">
+        <ion-icon name="trash-outline" slot="start"></ion-icon>
+        Eliminar artista
+      </ion-button>
+    </div>
+
+    <div class="albumes-section">
+      <h2>Álbumes</h2>
+      <div *ngIf="albumList?.length; else noAlbumes" class="albumes-grid spotify-grid">
+        <article class="spotify-album-card" *ngFor="let album of albumList" (click)="detail(album)" role="button"
+          tabindex="0" aria-label="Abrir {{album.nombre}}">
+          <div class="spotify-cover-wrap">
+            <img [src]="getAlbumImageUrl(album)" alt="Portada {{ album.nombre }}" class="spotify-cover" />
+            <div class="spotify-overlay">
+              <ion-icon name="play"></ion-icon>
+            </div>
+          </div>
+
+          <div class="spotify-meta">
+            <h3 class="spotify-album-title">{{ album.nombre }}</h3>
+            <p class="spotify-artist-name">{{ artista?.nombre || album.artista?.nombre || 'Artista desconocido' }}</p>
+          </div>
+        </article>
+      </div>
+      <ng-template #noAlbumes>
+        <p class="no-albumes">Este artista no tiene álbumes registrados.</p>
+      </ng-template>
+    </div>
+  </div>
+</ion-content>
+
+<app-footer></app-footer>

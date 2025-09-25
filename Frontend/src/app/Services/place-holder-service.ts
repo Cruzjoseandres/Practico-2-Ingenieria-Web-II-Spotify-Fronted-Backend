@@ -12,7 +12,7 @@ export class PlaceholderService {
   private _http = inject(HttpClient);
   private baseUrl = 'http://localhost:3000'
 
-
+  //generos
   getAllGeneros<T>(): Observable<T[]> {
     return this._http.get<T[]>(`${this.baseUrl}/generos/`);
   }
@@ -30,11 +30,7 @@ export class PlaceholderService {
   }
 
 
-
-
-
-
-
+  //artistas
   getAllArtistas<T>(): Observable<T[]> {
     return this._http.get<T[]>(`${this.baseUrl}/artistas/`);
   }
@@ -43,9 +39,61 @@ export class PlaceholderService {
     return this._http.post<any>(`${this.baseUrl}/artistas/`, formData);
   }
 
+  getArtistaById<T>(id: number): Observable<T> {
+    return this._http.get<T>(`${this.baseUrl}/artistas/${id}/artista`);
+  }
+
+  deleteArtista(id: number): Observable<any> {
+    return this._http.delete<any>(`${this.baseUrl}/artistas/${id}/delete`);
+  }
 
 
+  //albums
+  createAlbum(formData: FormData): Observable<any> {
+    return this._http.post<any>(`${this.baseUrl}/albums/`, formData);
+  }
 
+  getAlbumsByArtistaId<T>(artistaId: number): Observable<T[]> {
+    return this._http.get<T[]>(`${this.baseUrl}/albums/${artistaId}/artistas`);
+  }
+
+  getAlbumById<T>(id: number): Observable<T> {
+    return this._http.get<T>(`${this.baseUrl}/albums/${id}/album`);
+  }
+
+  getAllAlbums<T>(): Observable<T[]> {
+    return this._http.get<T[]>(`${this.baseUrl}/albums/`);
+  }
+
+  deleteAlbum(id: number): Observable<any> {
+    return this._http.delete<any>(`${this.baseUrl}/albums/${id}/delete`);
+  }
+
+
+  //canciones
+
+  getAllCanciones<T>(): Observable<T[]> {
+    return this._http.get<T[]>(`${this.baseUrl}/canciones/`);
+  }
+  getCancionesByAlbumId<T>(albumId: number): Observable<T[]> {
+    return this._http.get<T[]>(`${this.baseUrl}/canciones/${albumId}/albums`);
+  }
+
+  createCancion(formData: FormData): Observable<any> {
+    return this._http.post<any>(`${this.baseUrl}/canciones/`, formData);
+  }
+
+  getCancionesById<T>(id: number): Observable<T> {
+    return this._http.get<T>(`${this.baseUrl}/canciones/${id}/cancion`);
+  }
+
+  updateCancion(id: number, formData: FormData): Observable<any> {
+    return this._http.put<any>(`${this.baseUrl}/canciones/${id}/update`, formData);
+  }
+
+  deleteCancion(id: number): Observable<any> {
+    return this._http.delete<any>(`${this.baseUrl}/canciones/${id}/delete`);
+  }
 
 
 

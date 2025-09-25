@@ -15,7 +15,7 @@ import { HeaderComponent } from "src/app/shared/components/header/header.compone
   standalone: true,
   imports: [CommonModule, IonicModule, FooterComponent, HeaderComponent]
 })
-export class ArtistaListComponent implements OnInit {
+export class ArtistaListComponent {
 
   private router = inject(Router);
   private PlaceholderService = inject(PlaceholderService);
@@ -27,7 +27,7 @@ export class ArtistaListComponent implements OnInit {
   }
 
   private loadArtistas() {
-    this.placeholderService.getAllArtistas<Artista>()
+    this.PlaceholderService.getAllArtistas<Artista>()
       .subscribe(response => {
         this.artistaList = response;
       });
@@ -37,8 +37,8 @@ export class ArtistaListComponent implements OnInit {
     return `http://localhost:3000/ImagenesArtista/${artista.id}.jpg`;
   }
 
-  detail(category: Artista) {
-    this.router.navigate(['products', category]);
+  detail(artista: Artista) {
+    this.router.navigate([`/artistas/${artista.id}/artista`]);
   }
 
 }

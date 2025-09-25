@@ -1,0 +1,32 @@
+
+<app-header [title]="'Lista de Álbumes'" [showBackButton]="true" [showMenu]="true"></app-header>
+
+<ion-content class="album-list-content">
+  <div class="container">
+    <h2 class="page-title">Explorar álbumes</h2>
+
+    <div *ngIf="albumList?.length; else noAlbums" class="album-grid">
+      <article class="album-card" *ngFor="let album of albumList" (click)="detail(album)" role="button" tabindex="0">
+        <div class="cover-wrap">
+          <img [src]="getAlbumImageUrl(album)" alt="Portada {{ album.nombre }}" class="cover"/>
+          <div class="cover-overlay">
+            <button class="play-btn" aria-label="Reproducir {{ album.nombre }}">
+              <ion-icon name="play" aria-hidden="true"></ion-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="meta">
+          <h3 class="album-title">{{ album.nombre }}</h3>
+          <p class="artist-name">{{ album.artista?.nombre || 'Artista desconocido' }}</p>
+        </div>
+      </article>
+    </div>
+
+    <ng-template #noAlbums>
+      <p class="no-albums">No hay álbumes disponibles.</p>
+    </ng-template>
+  </div>
+</ion-content>
+
+<app-footer></app-footer>
