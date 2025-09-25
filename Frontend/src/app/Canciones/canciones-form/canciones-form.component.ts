@@ -22,6 +22,9 @@ export class CancionesFormComponent implements OnInit {
   albumId: number | null = null;
   album: Album | null = null;
 
+  urlImagen: string | null = null;
+  urlCancion: string | null = null
+
   form = new FormGroup({
     nombre: new FormControl<string>('', [Validators.required, Validators.minLength(2)]),
     idAlbum: new FormControl<number | null>(null, [Validators.required])
@@ -46,7 +49,6 @@ export class CancionesFormComponent implements OnInit {
   ngOnInit() {
     const idAlbum = this.route.snapshot.paramMap.get('idAlbum'); 
     if (idAlbum) {
-      this.isEditMode = true;
       this.form.get('idAlbum')?.setValue(+idAlbum); 
     } else {
       this.errorMsg = 'No se encontró el Album para asociar la Cancion.';
@@ -70,13 +72,11 @@ export class CancionesFormComponent implements OnInit {
 
         this.form.patchValue({
           nombre: res.nombre,
-          idAlbum: res.idAlbum
+          idAlbum: res.idAlbum,
         });
-        if (res.urlImagen) {
-          this.previewUrl = `http://localhost:3000/ImagenesCanciones/${res.urlImagen}`;
-        } else if (res.urlCancion) {
-          this.previewUrl = `http://localhost:3000/AudioCanciones/${res.urlCancion}.jpg`;
-        }
+        this.urlImagen = `http://localhost:3000/ImagenesCanciones/${id}.jpg?ts=${Date.now()}`;
+        this.urlCancion = `http://localhost:3000/AudioCanciones/${id}.mp3?ts=${Date.now()}`;
+
         this.successMsg = '';
         this.errorMsg = '';
       },
@@ -112,7 +112,7 @@ export class CancionesFormComponent implements OnInit {
     }
   getidAlbum() {
       return this.form.get('idAlbum') as FormControl;
-    }
+  }
 
   guardarDatos() {
     if (this.form.invalid) {

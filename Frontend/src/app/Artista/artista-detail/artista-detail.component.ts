@@ -39,11 +39,11 @@ export class ArtistaDetailComponent implements OnInit {
   }
 
   getArtistaImageUrl(artista: Artista): string {
-    return `http://localhost:3000/ImagenesArtista/${artista.id}.jpg`;
+    return `http://localhost:3000/ImagenesArtista/${artista.id}.jpg?ts=${Date.now()}`;
   }
 
   getAlbumImageUrl(album: Album): string {
-    return `http://localhost:3000/ImagenesAlbums/${album.id}.jpg`;
+    return `http://localhost:3000/ImagenesAlbums/${album.id}.jpg?ts=${Date.now()}`;
   }
 
   createAlbum() {
@@ -53,7 +53,7 @@ export class ArtistaDetailComponent implements OnInit {
 
   editarArtista() {
     if (!this.artista) return;
-    this.router.navigate(['/artista-form', this.artista.id]);
+    this.router.navigate([`/artistas/update/${this.artista.id}/`]);
   }
 
   eliminarArtista() {

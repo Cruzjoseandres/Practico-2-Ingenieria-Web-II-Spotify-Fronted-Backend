@@ -26,13 +26,12 @@ export class AlbumDetailComponent implements OnInit {
 
   ngOnInit() {
     let id = this.routerActivated.snapshot.paramMap.get('id') ?? "";
+    console.log(id);
     this.placeholderService.getAlbumById<Album>(parseInt(id))
           .subscribe((response: Album) => {
             this.album = response;
             console.log(this.album);
           });
-    
-
 
     this.placeholderService.getCancionesByAlbumId<Canciones>(parseInt(id))
       .subscribe(response => {
@@ -41,11 +40,11 @@ export class AlbumDetailComponent implements OnInit {
   }
 
   getCancionesImageUrl(canciones: Canciones): string {
-    return `http://localhost:3000/ImagenesCanciones/${canciones.id}.jpg`;
+    return `http://localhost:3000/ImagenesCanciones/${canciones.id}.jpg?ts=${Date.now()}`;
   }
 
   getAlbumImageUrl(album: Album): string {
-    return `http://localhost:3000/ImagenesAlbums/${album.id}.jpg`;
+    return `http://localhost:3000/ImagenesAlbums/${album.id}.jpg?ts=${Date.now()}`;
   }
 
   createCancion() {
@@ -55,7 +54,8 @@ export class AlbumDetailComponent implements OnInit {
 
   editarAlbum() {
     if (!this.album) return;
-    this.router.navigate(['/artista-form', this.album.id]);
+    this.router.navigate([`albums/update/${this.album.id}/`]);
+    console.log(this.album.id);
   }
 
   eliminarAlbum() {

@@ -32,7 +32,7 @@ export class CancionesDetailComponent implements OnInit {
     this.placeholderService.getCancionesById(id).subscribe({
       next: (res: any) => {
         this.cancion = res;
-        this.audioSrc = `http://localhost:3000/AudioCanciones/${res.url ?? (res.id + '.mp3')}`;
+        this.audioSrc = `http://localhost:3000/AudioCanciones/${res.url ?? (res.id + '.mp3')}?ts=${Date.now()}`;
       },
       error: (err) => {
         console.error('Error cargando canción', err);
@@ -55,7 +55,7 @@ export class CancionesDetailComponent implements OnInit {
   }
   editarCancion(cancion : Canciones){
     console.log("entrando a editar");
-    this.router.navigate([`/canciones/${cancion.id}/canciones-detail`]);
+    this.router.navigate([`/canciones/update/${cancion.id}/`]);
   }
   
 
@@ -72,6 +72,10 @@ export class CancionesDetailComponent implements OnInit {
         alert('Error eliminando canción');
       }
     });
+  }
+
+  getCancionImageUrl(cancion: Canciones): string {
+    return `http://localhost:3000/ImagenesCanciones/${cancion.id}.jpg?ts=${Date.now()}`;
   }
 
 }

@@ -1,0 +1,43 @@
+@import '../../Artista/artista-list/artista-list.component.scss';
+
+.select-artists-page {
+  background: linear-gradient(180deg, #080808 0%, #0f0f12 100%);
+  padding: 20px 16px;
+}
+
+.artist-card.selectable {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.artist-card.selectable.selected {
+  border: 2px solid var(--spotify-green);
+  box-shadow: 0 0 0 2px var(--spotify-green);
+  background: linear-gradient(180deg, rgba(29,185,84,0.08), rgba(107,226,129,0.04));
+}
+
+.artist-checkbox {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  --checkbox-background: #222;
+  --checkbox-checked-background: var(--spotify-green);
+  --checkbox-border-color: #fff;
+  --checkbox-border-radius: 50%;
+  z-index: 2;
+}
+
+.actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.no-artists {
+  text-align: center;
+  color: #bdbdbd;
+  margin-top: 30px;
+  font-size: 16px;
+}

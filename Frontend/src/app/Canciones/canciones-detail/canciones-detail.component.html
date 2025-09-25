@@ -4,7 +4,7 @@
   <div class="wrap">
     <div class="hero">
       <div class="cover">
-        <img *ngIf="cancion" [src]="'http://localhost:3000/ImagenesCanciones/' + (cancion.url ?? (cancion.id + '.jpg'))"
+        <img *ngIf="cancion" [src]="getCancionImageUrl(cancion)"
           alt="{{ cancion?.nombre }}" />
       </div>
 

@@ -34,7 +34,7 @@ export class ArtistaListComponent {
   }
 
   getArtistaImageUrl(artista: Artista): string {
-    return `http://localhost:3000/ImagenesArtista/${artista.id}.jpg`;
+    return `http://localhost:3000/ImagenesArtista/${artista.id}.jpg?ts=${Date.now()}`;
   }
 
   detail(artista: Artista) {

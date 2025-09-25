@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -16,7 +16,9 @@ export class HeaderComponent {
   @Input() showMenu: boolean = true;
   @Input() backUrl: string = '/home';
 
-  constructor(private router: Router) {}
+  @Output() search = new EventEmitter<string>();
+
+  constructor(private router: Router) { }
 
   navigateBack() {
     this.router.navigate([this.backUrl]);

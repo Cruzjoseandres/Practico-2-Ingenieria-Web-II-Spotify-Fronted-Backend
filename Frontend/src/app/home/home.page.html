@@ -18,7 +18,7 @@
           <p>Explora y gestiona álbumes</p>
         </div>
         <div class="actions">
-          <ion-button fill="clear" (click)="$event.stopPropagation(); navigateTo('/albums/new')">
+          <ion-button fill="clear" (click)="$event.stopPropagation(); navigateTo('/artistas')">
             <ion-icon name="add-outline"></ion-icon>
             Crear
           </ion-button>
@@ -30,7 +30,7 @@
       </div>
 
       <!-- Canciones -->
-      <div class="dashboard-card" (click)="navigateTo('/songs')">
+      <div class="dashboard-card" (click)="navigateTo('/canciones')">
         <div class="icon">
           <ion-icon name="musical-notes-outline" size="large"></ion-icon>
         </div>
@@ -39,11 +39,11 @@
           <p>Explora y gestiona canciones</p>
         </div>
         <div class="actions">
-          <ion-button fill="clear" (click)="$event.stopPropagation(); navigateTo('/songs/new')">
+          <ion-button fill="clear" (click)="$event.stopPropagation(); navigateTo('/albums')">
             <ion-icon name="add-outline"></ion-icon>
             Crear
           </ion-button>
-          <ion-button fill="clear" (click)="$event.stopPropagation(); navigateTo('/songs')">
+          <ion-button fill="clear" (click)="$event.stopPropagation(); navigateTo('/canciones')">
             <ion-icon name="search-outline"></ion-icon>
             Ver todas
           </ion-button>

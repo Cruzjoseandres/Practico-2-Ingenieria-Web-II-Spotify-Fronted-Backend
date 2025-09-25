@@ -14,7 +14,7 @@ import { FooterComponent } from '../../shared/components/footer/footer.component
   standalone: true,
   imports: [CommonModule, IonicModule, HeaderComponent, FooterComponent]
 })
-export class GeneroListComponent implements OnInit {
+export class GeneroListComponent {
 
   private router = inject(Router);
   private PlaceholderService = inject(PlaceholderService);
@@ -22,16 +22,23 @@ export class GeneroListComponent implements OnInit {
 
 
 
-  ngOnInit() {
-    this.PlaceholderService.getAllGeneros<Genero>()
-      .subscribe(response => {
-        this.generoList = response;
-        console.log(this.generoList);
-      });
+  ionViewWillEnter() {
+      this.loadGeneros();
+    }
+  
+    private loadGeneros() {
+      this.PlaceholderService.getAllGeneros<Genero>()
+        .subscribe(response => {
+          this.generoList = response;
+        });
+    }
+
+  detail(genero: Genero) {
+    this.router.navigate([`/generos/${genero.id}/genero`]);
   }
 
-  detail(category: string) {
-    this.router.navigate(['products', category]);
-  }
+  addGenero() {
+  this.router.navigate(['/generos/create']);
+}
 
 }

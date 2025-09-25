@@ -1,0 +1,45 @@
+<app-header [title]="'Añadir artistas al género'" [showBackButton]="true" [backUrl]="'/generos'" [showMenu]="false"></app-header>
+
+<ion-content class="select-artists-page">
+  <div class="page-inner">
+    <section class="hero">
+      <h2>Selecciona artistas para añadir</h2>
+      <p>Solo se muestran los artistas que aún no pertenecen a este género.</p>
+    </section>
+
+    <form (ngSubmit)="addArtistas()" [formGroup]="form">
+      <section class="artists-grid" role="list">
+        <article
+          class="artist-card selectable"
+          role="listitem"
+          *ngFor="let artista of artistasList"
+          [class.selected]="isSelected(artista.id)"
+          (click)="toggleSeleccion(artista.id)"
+        >
+          <div class="cover-wrap" aria-hidden="true">
+            <img [src]="getArtistaImageUrl(artista)" [alt]="artista.nombre" />
+            <ion-checkbox
+              [checked]="isSelected(artista.id)"
+              (click)="$event.stopPropagation()"
+              class="artist-checkbox"
+              tabindex="-1"
+            ></ion-checkbox>
+          </div>
+          <div class="meta">
+            <h3>{{ artista.nombre | titlecase }}</h3>
+            <p class="sub">Artista</p>
+          </div>
+        </article>
+      </section>
+      <div class="actions">
+        <ion-button color="success" type="submit" [disabled]="selectedIds.length === 0">
+          Añadir seleccionados
+        </ion-button>
+      </div>
+    </form>
+    <div *ngIf="artistasList.length === 0" class="no-artists">
+      <p>Todos los artistas ya pertenecen a este género.</p>
+    </div>
+  </div>
+</ion-content>
+<app-footer></app-footer>

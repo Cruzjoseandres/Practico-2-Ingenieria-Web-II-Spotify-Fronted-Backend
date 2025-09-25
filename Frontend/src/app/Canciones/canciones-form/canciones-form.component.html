@@ -30,6 +30,11 @@
       <input type="file" name="urlImagen" accept="image/*" (change)="onImageChange($event)" />
     </ion-item>
 
+    <ion-item *ngIf="isEditMode && urlImagen && !previewUrl">
+      <ion-label position="stacked">Imagen actual</ion-label>
+      <ion-img [src]="urlImagen"></ion-img>
+    </ion-item>
+
     <ion-item *ngIf="previewUrl">
       <ion-label position="stacked">Vista previa</ion-label>
       <ion-img [src]="previewUrl"></ion-img>
@@ -40,9 +45,13 @@
       <input type="file" name="urlCancion" accept="audio/*" (change)="onAudioChange($event)" />
       <ion-note *ngIf="selectedAudio" slot="end" class="audio-name">{{ selectedAudio.name }}</ion-note>
     </ion-item>
+    <ion-item *ngIf="isEditMode && urlCancion && !selectedAudio">
+      <ion-label position="stacked">Audio actual</ion-label>
+      <audio [src]="urlCancion" controls></audio>
+    </ion-item>
 
     <div class="actions">
-      <ion-button type="submit" expand="block" [disabled]="form.invalid || !selectedAudio || !selectedImage">
+      <ion-button type="submit" expand="block" [disabled]="form.invalid || (!isEditMode && (!selectedAudio || !selectedImage))">
         <ion-icon name="cloud-upload-outline" slot="start"></ion-icon>
         Guardar canción
       </ion-button>

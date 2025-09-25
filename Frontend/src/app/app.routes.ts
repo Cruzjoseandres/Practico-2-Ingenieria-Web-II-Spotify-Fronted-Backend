@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Album } from './models/Album.models';
+import { FormComponent } from './Artista/form/form.component';
 
 export const routes: Routes = [
   {
@@ -15,6 +16,18 @@ export const routes: Routes = [
     path: 'generos/create',
     loadComponent: () => import('./Genero/genero-form/genero-form.component').then(m => m.GeneroFormComponent),
   },
+  {
+    path: 'generos/:id/genero',
+    loadComponent: () => import('./Genero/genero-detail/genero-detail.component').then(m => m.GeneroDetailComponent),
+  },
+  {
+    path: 'generos/update/:id',
+    loadComponent: () => import('./Genero/genero-form/genero-form.component').then(m => m.GeneroFormComponent),
+  },
+  {
+    path: 'generos/selected/:id',
+    loadComponent: () => import('./Genero/genero-select/genero-select.component').then(m => m.GeneroSelectComponent),
+  },
   //artistas
   {
     path: 'artistas',
@@ -28,6 +41,10 @@ export const routes: Routes = [
     path: 'artistas/:id/artista',
     loadComponent: () => import('./Artista/artista-detail/artista-detail.component').then(m => m.ArtistaDetailComponent),
   },
+  {
+    path: 'artistas/update/:id',
+    loadComponent: () => import('./Artista/form/form.component').then(m => m.FormComponent),
+  },
   //albums
   {
     path: 'albums/create/:idArtista',
@@ -40,6 +57,10 @@ export const routes: Routes = [
   {
     path: 'albums/:id/album-detail',
     loadComponent: () => import('./Album/album-detail/album-detail.component').then(m => m.AlbumDetailComponent),
+  },
+  {
+    path: 'albums/update/:id',
+    loadComponent: () => import('./Album/album-form/album-form.component').then(m => m.AlbumFormComponent),
   },
 
   //canciones

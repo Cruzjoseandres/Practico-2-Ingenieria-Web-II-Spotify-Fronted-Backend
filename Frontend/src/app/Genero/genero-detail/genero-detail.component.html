@@ -1,0 +1,50 @@
+<app-header [title]="genero?.nombre || 'Detalle Género'" [showBackButton]="true" [backUrl]="'/generos'" [showMenu]="false"></app-header>
+
+<ion-content class="genre-detail-page">
+  <div class="page-inner">
+    <section class="hero">
+      <h2>{{ genero?.nombre | titlecase }}</h2>
+      <p class="meta">ID: {{ genero?.id }}</p>
+      <div class="actions">
+        <ion-button color="success" (click)="selectedArtist()">
+          <ion-icon name="person-add-outline" slot="start"></ion-icon>
+          Añadir artista
+        </ion-button>
+        <ion-button color="primary" (click)="editarGenero()">
+          <ion-icon name="create-outline" slot="start"></ion-icon>
+          Editar género
+        </ion-button>
+        <ion-button color="danger" (click)="eliminarGenero()">
+          <ion-icon name="trash-outline" slot="start"></ion-icon>
+          Eliminar género
+        </ion-button>
+      </div>
+    </section>
+
+    <section class="artists-grid" role="list">
+      <article
+        class="artist-card"
+        role="listitem"
+        *ngFor="let artista of artistasList"
+        (click)="detail(artista)"
+        title="{{ artista.nombre | titlecase }}"
+      >
+        <div class="cover-wrap" aria-hidden="true">
+          <img
+            [src]="getArtistasImageUrl(artista)"
+            [alt]="artista.nombre"
+          />
+          <button class="play" aria-hidden="true">▶</button>
+        </div>
+        <div class="meta">
+          <h3>{{ artista.nombre | titlecase }}</h3>
+          <p class="sub">Artista</p>
+        </div>
+      </article>
+    </section>
+    <div *ngIf="artistasList?.length === 0" class="no-artists">
+      <p>No hay artistas en este género.</p>
+    </div>
+  </div>
+</ion-content>
+<app-footer></app-footer>

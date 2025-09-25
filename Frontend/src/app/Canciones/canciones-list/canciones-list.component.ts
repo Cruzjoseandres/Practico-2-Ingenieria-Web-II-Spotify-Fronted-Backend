@@ -34,7 +34,7 @@ export class CancionesListComponent  {
   }
 
   getCancionImageUrl(canciones: Canciones): string {
-    return `http://localhost:3000/ImagenesCanciones/${canciones.id}.jpg`;
+    return `http://localhost:3000/ImagenesCanciones/${canciones.id}.jpg?ts=${Date.now()}`;
   }
 
   detail(canciones: Canciones) {

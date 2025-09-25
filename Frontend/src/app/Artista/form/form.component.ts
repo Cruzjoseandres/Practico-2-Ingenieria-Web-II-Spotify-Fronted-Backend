@@ -21,6 +21,8 @@ export class FormComponent implements OnInit {
   isEditMode = false;
   artistaId: number | null = null;
 
+  imagenArtista: string | null = null;
+
   errorMsg = '';
   successMsg = '';
 
@@ -50,6 +52,7 @@ export class FormComponent implements OnInit {
         this.form.patchValue({
           nombre: res.nombre
         });
+        this.imagenArtista = `http://localhost:3000/ImagenesArtista/${id}.jpg?ts=${Date.now()}`;
         this.successMsg = '';
         this.errorMsg = '';
       },
@@ -70,10 +73,10 @@ export class FormComponent implements OnInit {
     if (input.files && input.files.length) {
       this.selectedFile = input.files[0];
       const reader = new FileReader();
-    reader.onload = () => {
-      this.previewUrl = reader.result; // Base64
-    };
-    reader.readAsDataURL(this.selectedFile);
+      reader.onload = () => {
+        this.previewUrl = reader.result; 
+      };
+      reader.readAsDataURL(this.selectedFile);
     } else {
       this.selectedFile = null;
     }
@@ -93,19 +96,34 @@ export class FormComponent implements OnInit {
     if (this.selectedFile) {
       fd.append('imagenArtista', this.selectedFile, this.selectedFile.name);
     }
-
-    this.placeholderService.createArtista(fd).subscribe({
-      next: (res) => {
-        this.successMsg = `Artista creado con ID ${res.id}`;
-        this.errorMsg = '';
-        this.router.navigate(['/artistas']);
-      },
-      error: (err) => {
-        console.log(err);
-        this.errorMsg = err.error?.error || 'Error inesperado al crear el Artista';
-        this.successMsg = '';
-      }
-    });
+    if (this.isEditMode && this.artistaId) {
+      this.placeholderService.updateArtista(this.artistaId, fd).subscribe({
+        next: (res) => {
+          this.successMsg = `Artista actualizado ${res.id}`;
+          this.errorMsg = '';
+          this.router.navigate(['/artistas']);
+          console.log("si actualizo", res);
+        },
+        error: (err) => {
+          console.log(err);
+          this.errorMsg = err.error?.error || 'Error inesperado al actualizar el Artista';
+          this.successMsg = '';
+        }
+      });
+    } else {
+      this.placeholderService.createArtista(fd).subscribe({
+        next: (res) => {
+          this.successMsg = `Artista creado con ID ${res.id}`;
+          this.errorMsg = '';
+          this.router.navigate(['/artistas']);
+        },
+        error: (err) => {
+          console.log(err);
+          this.errorMsg = err.error?.error || 'Error inesperado al crear el Artista';
+          this.successMsg = '';
+        }
+      });
+    }
   }
 
   cancelar() {

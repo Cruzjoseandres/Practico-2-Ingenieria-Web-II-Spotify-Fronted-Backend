@@ -29,6 +29,14 @@ export class PlaceholderService {
     return this._http.get<T>(`${this.baseUrl}/generos/${id}/genero`);
   }
 
+  getArtistasByGeneroId<T>(generoId: number): Observable<T[]> {
+    return this._http.get<T[]>(`${this.baseUrl}/artistasGenero/${generoId}/artistasConGeneros`);
+  }
+
+  deleteGenero(id: number): Observable<any> {
+    return this._http.delete<any>(`${this.baseUrl}/generos/${id}/delete`);
+  }
+
 
   //artistas
   getAllArtistas<T>(): Observable<T[]> {
@@ -37,6 +45,10 @@ export class PlaceholderService {
 
   createArtista(formData: FormData): Observable<any> {
     return this._http.post<any>(`${this.baseUrl}/artistas/`, formData);
+  }
+
+  updateArtista(id: number, formData: FormData): Observable<any> {
+    return this._http.put<any>(`${this.baseUrl}/artistas/${id}/update`, formData);
   }
 
   getArtistaById<T>(id: number): Observable<T> {
@@ -53,6 +65,11 @@ export class PlaceholderService {
     return this._http.post<any>(`${this.baseUrl}/albums/`, formData);
   }
 
+  updateAlbum(id: number, formData: FormData): Observable<any> {
+    return this._http.put<any>(`${this.baseUrl}/albums/${id}/update`, formData);
+  }
+
+
   getAlbumsByArtistaId<T>(artistaId: number): Observable<T[]> {
     return this._http.get<T[]>(`${this.baseUrl}/albums/${artistaId}/artistas`);
   }
@@ -68,6 +85,7 @@ export class PlaceholderService {
   deleteAlbum(id: number): Observable<any> {
     return this._http.delete<any>(`${this.baseUrl}/albums/${id}/delete`);
   }
+
 
 
   //canciones
@@ -95,6 +113,19 @@ export class PlaceholderService {
     return this._http.delete<any>(`${this.baseUrl}/canciones/${id}/delete`);
   }
 
+  //artistagenero
+  addArtistasToGenero(idGenero: number, idArtistas: number[]) {
+  return this._http.post(`${this.baseUrl}/artistasGenero/generos/${idGenero}/artistas`,{ idArtistas });
+}
+  getArtistasNotInGenero<T>(idGenero: number): Observable<T[]> {
+    return this._http.get<T[]>(`${this.baseUrl}/artistasGenero/generos/${idGenero}/artistas-disponibles`);
+  }
 
+
+
+  //search
+  globalSearch(q: string) {
+  return this._http.get<any>(`http://localhost:3000/search/search?q=${encodeURIComponent(q)}`);
+}
 
 }

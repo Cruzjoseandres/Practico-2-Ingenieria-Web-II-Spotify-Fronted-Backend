@@ -7,7 +7,7 @@
       <ion-card-content class="ion-text-center">
         <ion-icon name="alert-circle-outline"></ion-icon>
         {{ errorMsg }}
-        <ion-button fill="clear" size="small" (click)="clearError()">
+        <ion-button fill="clear" size="small" (click)="errorMsg = ''">
           <ion-icon name="close-outline"></ion-icon>
         </ion-button>
       </ion-card-content>
@@ -27,17 +27,25 @@
 
     <ion-item>
       <ion-label position="stacked">Imagen del Álbum</ion-label>
-      <input type="file" name="imagenAlbum" accept="image/*" (change)="onFileSelected($event)" />
+      <input type="file" name="imagenAlbum" accept="image/*" (change)="onImageChange($event)" />
     </ion-item>
-    <div class="preview-img-container" *ngIf="previewUrl">
-      <img [src]="previewUrl" alt="Vista previa del álbum" class="preview-img"/>
-    </div>
+
+    <ion-item *ngIf="isEditMode && imagenAlbum && !previewUrl">
+      <ion-label position="stacked">Imagen actual</ion-label>
+      <ion-img [src]="imagenAlbum"></ion-img>
+    </ion-item>
+
+    <ion-item *ngIf="previewUrl">
+      <ion-label position="stacked">Vista previa</ion-label>
+      <ion-img [src]="previewUrl"></ion-img>
+    </ion-item>
 
     <div class="actions">
-      <ion-button type="submit" expand="block" [disabled]="form.invalid">
-        <ion-icon name="add-outline" slot="start"></ion-icon>
-        Guardar Álbum
+      <ion-button type="submit" expand="block" [disabled]="form.invalid || (!isEditMode && (!selectedImage))">
+        <ion-icon name="cloud-upload-outline" slot="start"></ion-icon>
+        Guardar Album 
       </ion-button>
+
       <ion-button fill="clear" (click)="cancelar()">
         <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
         Cancelar

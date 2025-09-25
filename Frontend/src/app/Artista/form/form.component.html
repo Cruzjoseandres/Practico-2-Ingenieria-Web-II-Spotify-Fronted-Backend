@@ -29,13 +29,19 @@
       <ion-label position="stacked">Imagen</ion-label>
       <input type="file" namme="imagen" accept="image/*" (change)="onFileSelected($event)" />
     </ion-item>
+
+    <ion-item *ngIf="isEditMode && imagenArtista && !previewUrl">
+      <ion-label position="stacked">Imagen actual</ion-label>
+      <ion-img [src]="imagenArtista"></ion-img>
+    </ion-item>
+
     <ion-item *ngIf="previewUrl">
       <ion-label position="stacked">Vista previa</ion-label>
       <ion-img [src]="previewUrl"></ion-img>
     </ion-item>
 
     <div class="actions">
-      <ion-button type="submit" expand="block" [disabled]="form.invalid">
+      <ion-button type="submit" expand="block" [disabled]="form.invalid || (!isEditMode && !selectedFile)">
         <ion-icon name="add-outline" slot="start"></ion-icon>
         Guardar Artista
       </ion-button>

@@ -34,7 +34,7 @@ export class AlbumListComponent {
   }
 
   getAlbumImageUrl(album: Album): string {
-    return `http://localhost:3000/ImagenesAlbums/${album.id}.jpg`;
+    return `http://localhost:3000/ImagenesAlbums/${album.id}.jpg?ts=${Date.now()}`;
   }
 
   detail(album: Album) {
